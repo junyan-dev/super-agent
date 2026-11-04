@@ -29,6 +29,26 @@ convert_pdf_to_word("report.pdf", "report.docx")  # explicit target
 The converter recreates text with its formatting, images, bordered tables and
 page breaks. Scanned pages stay as images because no OCR is performed.
 
+### `word_to_pdf.py`
+
+Convert a Word document into a PDF file that keeps the document's layout:
+
+```python
+from word_to_pdf import convert_word_to_pdf
+
+convert_word_to_pdf("report.docx")                # writes report.pdf
+convert_word_to_pdf("report.docx", "report.pdf")  # explicit target
+```
+
+The PDF is rendered by a headless LibreOffice installation, so pages, fonts,
+tables, images, headers and footers are preserved. Word (`.docx`, `.docm`)
+and legacy `.doc` documents are accepted; password-protected documents raise
+`WordToPdfError`.
+
+LibreOffice is required for this conversion and is not a Python package:
+install it and either put `soffice` on `PATH` or set `WORD_TO_PDF_OFFICE` to
+the executable.
+
 Install the conversion dependencies and run the tests:
 
 ```bash
